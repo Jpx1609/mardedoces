@@ -1,5 +1,5 @@
 // Mar de Doces - Service Worker
-const CACHE = 'mdc-v1';
+const CACHE = 'mdc-v2'; // <-- Atualizado para v2 para forçar o celular a baixar a versão sem dados fictícios
 const ASSETS = [
   './',
   'index.html',
@@ -24,7 +24,6 @@ self.addEventListener('activate', e => {
 });
 
 self.addEventListener('fetch', e => {
-  // Network first para fontes, cache-first para o app shell
   if (e.request.url.includes('fonts.googleapis') || e.request.url.includes('fonts.gstatic')) {
     e.respondWith(
       caches.open(CACHE).then(c =>
