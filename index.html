@@ -1353,53 +1353,6 @@ function getConfig() {
 }
 
 /* =====================================================
-   SEED DATA (only on first run)
-   ===================================================== */
-function seedIfEmpty() {
-  if (DB.get(K_PEDIDOS).length === 0) {
-    const today = todayStr();
-    const yesterday = dateStr(new Date(Date.now() - 86400000));
-    DB.set(K_PEDIDOS, [
-      { id: uid(), cliente: 'Ana Souza', contato: '(21) 99999-0001', data: yesterday, entrega: today, status: 'pending', itens: [{nome:'Brigadeiro', qtd:30}, {nome:'Ninho', qtd:10}], valor: 90, entregaTipo: 'Entrega em domicílio', obs: 'Ligar antes de sair' },
-      { id: uid(), cliente: 'Pedro Lima', contato: '(21) 98888-0002', data: yesterday, entrega: yesterday, status: 'done', itens: [{nome:'Bolo de pote', qtd:4}], valor: 80, entregaTipo: 'Retirada no local', obs: '' },
-      { id: uid(), cliente: 'Maria Fernanda', contato: '(21) 97777-0003', data: today, entrega: dateStr(new Date(Date.now()+86400000)), status: 'pending', itens: [{nome:'Trufas belga', qtd:20}], valor: 120, entregaTipo: 'Retirada no local', obs: 'Embalagem especial dourada' },
-      { id: uid(), cliente: 'João Carlos', contato: '(21) 96666-0004', data: yesterday, entrega: yesterday, status: 'done', itens: [{nome:'Bem-casado', qtd:50}], valor: 150, entregaTipo: 'Entrega em domicílio', obs: 'Casamento 01/06' }
-    ]);
-  }
-  if (DB.get(K_TRANSACOES).length === 0) {
-    const today = todayStr();
-    const yesterday = dateStr(new Date(Date.now() - 86400000));
-    DB.set(K_TRANSACOES, [
-      { id: uid(), tipo: 'entrada', desc: 'Pedido — João Carlos', valor: 150, data: yesterday, categoria: 'Vendas', pagamento: 'Pix', obs: '' },
-      { id: uid(), tipo: 'entrada', desc: 'Pedido — Pedro Lima', valor: 80, data: yesterday, categoria: 'Vendas', pagamento: 'Pix', obs: '' },
-      { id: uid(), tipo: 'saida', desc: 'Chocolate meio amargo 2kg', valor: 48, data: yesterday, categoria: 'Ingredientes', pagamento: 'Pix', obs: '' },
-      { id: uid(), tipo: 'saida', desc: 'Embalagens e caixas', valor: 85, data: dateStr(new Date(Date.now()-2*86400000)), categoria: 'Embalagens', pagamento: 'Dinheiro', obs: '' },
-      { id: uid(), tipo: 'entrada', desc: 'Pedido — Festa Maria', valor: 280, data: dateStr(new Date(Date.now()-2*86400000)), categoria: 'Vendas', pagamento: 'Pix', obs: '' },
-      { id: uid(), tipo: 'entrada', desc: 'Pedido — Ana Souza', valor: 90, data: today, categoria: 'Vendas', pagamento: 'Pix', obs: '' },
-    ]);
-  }
-  if (DB.get(K_INGREDIENTES).length === 0) {
-    DB.set(K_INGREDIENTES, [
-      { id: uid(), nome: 'Chocolate meio amargo', emoji: '🍫', qtd: 1.2, unidade: 'kg', minimo: 0.5, preco: 24 },
-      { id: uid(), nome: 'Leite condensado', emoji: '🥛', qtd: 3, unidade: 'lata', minimo: 2, preco: 5.5 },
-      { id: uid(), nome: 'Manteiga sem sal', emoji: '🧈', qtd: 0.2, unidade: 'kg', minimo: 0.5, preco: 15 },
-      { id: uid(), nome: 'Açúcar refinado', emoji: '🍬', qtd: 2.5, unidade: 'kg', minimo: 1, preco: 4.5 },
-      { id: uid(), nome: 'Ovos', emoji: '🥚', qtd: 18, unidade: 'un', minimo: 6, preco: 0.8 },
-      { id: uid(), nome: 'Farinha de trigo', emoji: '🌾', qtd: 1, unidade: 'kg', minimo: 0.5, preco: 4 },
-      { id: uid(), nome: 'Creme de leite', emoji: '🫙', qtd: 4, unidade: 'lata', minimo: 2, preco: 4.2 },
-      { id: uid(), nome: 'Chocolate branco', emoji: '⬜', qtd: 0.8, unidade: 'kg', minimo: 0.3, preco: 30 }
-    ]);
-  }
-  if (DB.get(K_RECEITAS).length === 0) {
-    DB.set(K_RECEITAS, [
-      { id: uid(), nome: 'Brigadeiro Gourmet', emoji: '🍫', rendimento: 40, tempo: '45min', custo: 28, instrucoes: 'Ingredientes:\n- 1 lata leite condensado\n- 2 col. sopa manteiga\n- 4 col. sopa chocolate em pó\n- Granulado para cobrir\n\nModo de preparo:\n1. Misture leite condensado, manteiga e chocolate em pó\n2. Leve ao fogo médio, mexendo sempre\n3. Quando desgrudar do fundo, retire\n4. Deixe esfriar e enrole\n5. Cubra com granulado' },
-      { id: uid(), nome: 'Trufa Belga', emoji: '🍬', rendimento: 24, tempo: '1h20min', custo: 45, instrucoes: 'Ingredientes:\n- 200g chocolate meio amargo\n- 100ml creme de leite\n- 20g manteiga\n- Chocolate em pó para finalizar\n\nModo de preparo:\n1. Derreta o chocolate em banho-maria\n2. Adicione o creme de leite quente\n3. Adicione a manteiga e misture\n4. Leve à geladeira por 2h\n5. Modele as trufas e finalize com chocolate em pó' },
-      { id: uid(), nome: 'Bolo de Pote', emoji: '🍰', rendimento: 6, tempo: '1h', custo: 36, instrucoes: 'Ingredientes (por pote):\n- Bolo de chocolate fatiado\n- Brigadeiro\n- Chantilly\n- Granulado\n\nModo de preparo:\n1. Monte camadas no pote de vidro 500ml\n2. Bolo → brigadeiro → chantilly\n3. Repita as camadas\n4. Finalize com granulado e cerejas' }
-    ]);
-  }
-}
-
-/* =====================================================
    HELPERS
    ===================================================== */
 function todayStr() {
@@ -1430,7 +1383,7 @@ function statusLabel(s) {
 
 /* =====================================================
    NAVIGATION
-   ===================================================== */
+   ==================================================== */
 let currentScreen = 'home';
 const screens = ['home','pedidos','financeiro','estoque','receitas','relatorios'];
 
@@ -2054,7 +2007,7 @@ function editarReceita(id) {
 
 function salvarReceita() {
   const nome = document.getElementById('r-nome').value.trim();
-  if (!nome) { showToast('⚠️ Digite o nome da receita'); return; }
+  if (!nome) { showToast('⚠️ Digite o nome do receita'); return; }
 
   const r = {
     id: editingReceitaId || uid(),
@@ -2075,7 +2028,7 @@ function salvarReceita() {
   DB.set(K_RECEITAS, list);
   closeModal('modal-receita');
   renderScreen(currentScreen);
-  showToast(editingReceitaId ? '✅ Receita atualizada!' : '✅ Receita salva!');
+  showToast(editingReceitaId ? '✅ Receita updated!' : '✅ Receita salva!');
   editingReceitaId = null;
 }
 
@@ -2292,7 +2245,6 @@ function showToast(msg) {
 /* =====================================================
    INIT
    ===================================================== */
-seedIfEmpty();
 renderHome();
 
 // Service worker registration (PWA offline)
