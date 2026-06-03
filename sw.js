@@ -1,11 +1,11 @@
 // Mar de Doces - Service Worker
 const CACHE = 'mdc-v1';
 const ASSETS = [
-  '/',
-  '/index.html',
-  '/manifest.json',
-  '/icons/iconzinho.png',
-  '/icons/iconzao.png',
+  './',
+  'index.html',
+  'manifest.json',
+  'icons/iconzinho.png',
+  'icons/iconzao.png',
   'https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap'
 ];
 
@@ -24,7 +24,7 @@ self.addEventListener('activate', e => {
 });
 
 self.addEventListener('fetch', e => {
-  // Network first for fonts, cache-first for app shell
+  // Network first para fontes, cache-first para o app shell
   if (e.request.url.includes('fonts.googleapis') || e.request.url.includes('fonts.gstatic')) {
     e.respondWith(
       caches.open(CACHE).then(c =>
