@@ -1,26 +1,35 @@
 {
-"name": "Mar de Doces",
-"short_name": "Mar de Doces",
-"description": "Controle completo da sua loja de doces",
-"start_url": "./",
-"display": "standalone",
-"orientation": "portrait",
-"background_color": "#fdf4f0",
-"theme_color": "#d64f6e",
-"lang": "pt-BR",
-"icons": [
-{
-"src": "icons/iconzinho.png",
-"sizes": "192x192",
-"type": "image/png",
-"purpose": "any maskable"
-},
-{
-"src": "icons/iconzao.png",
-"sizes": "512x512",
-"type": "image/png",
-"purpose": "any maskable"
-}
-],
-"categories": ["business", "finance", "productivity"]
+  "name": "Mar de Doces",
+  "short_name": "Mar de Doces",
+  "description": "Controle completo de pedidos, estoque e financeiro para sua confeitaria.",
+  "start_url": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#fdf4f0",
+  "theme_color": "#d64f6e",
+  "lang": "pt-BR",
+  "icons": [
+    {
+      "src": "icons/iconzinho.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/iconzao.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "icons/screenshot-mobile.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Tela Inicial do Mar de Doces"
+    }
+  ],
+  "categories": ["business", "finance", "productivity"]
 }
